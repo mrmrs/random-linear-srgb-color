@@ -1,0 +1,24 @@
+{
+  "name": "random-linear-srgb-color",
+  "description": "Generate a random linear sRGB color.",
+  "author": "@mrmrs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "test": "ava -v"
+  },
+  "repository": "mrmrs/random-linear-srgb-color",
+  "keywords": [
+    "sRGB",
+    "color",
+    "random",
+    "generate"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "ava": "^5.3.1"
+  }
+}
