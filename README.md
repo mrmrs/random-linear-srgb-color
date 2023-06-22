@@ -40,10 +40,11 @@ console.log(randomLinearSRGBColor(0, 1, 0, 1, 0, 1, 0, 1, true));
 
 In the object representation, the returned object contains the following properties:
 
-red: The value of the red channel (range: 0 to 1 or 0 to 255).
-green: The value of the green channel (range: 0 to 1 or 0 to 255).
-blue: The value of the blue channel (range: 0 to 1 or 0 to 255).
-alpha: The value of the alpha channel (range: 0 to 1 or 0 to 100).
+- **red**: The value of the red channel (range: 0 to 1 or 0 to 255).
+- **green**: The value of the green channel (range: 0 to 1 or 0 to 255).
+- **blue**: The value of the blue channel (range: 0 to 1 or 0 to 255).
+- **alpha**: The value of the alpha channel (range: 0 to 1 or 0 to 100).
+
 By adjusting the input parameters and using the useObjectExport parameter, you can control the range of each channel and obtain the color as an object with the respective channel values.
 
 ## Acknowledgements
