@@ -10,42 +10,37 @@ npm install --save random-linear-srgb-color
 
 ## Usage
 
-The ```randomLinearSRGBColor``` function can be used to generate a random linear sRGB color. By default, it returns the color as a string in the ```color(linear-srgb R G B / A%)``` format. However, you can also opt to get an object representation of the color by setting the ```useObjectExport``` parameter to ```true```.
+`randomLinearSRGBColor` returns a random linear sRGB color as a CSS `color()` string by default. Pass `useObjectExport` as the final argument to get the raw numeric channels instead.
 
 ```javascript
-var randomLinearSRGBColor = require('random-linear-srgb-color');
+const randomLinearSRGBColor = require('random-linear-srgb-color');
 
-// Generate random linear sRGB color as a string
-console.log(randomLinearSRGBColor()); // color(linear-srgb 0.74 0.21 0.45)
-console.log(randomLinearSRGBColor(0, 1, 0, 1, 0, 1, 0, 1)); // color(linear-srgb 0.10 0.88 0.42 / 0.62)
-
-// Generate random linear sRGB color as an object
-console.log(randomLinearSRGBColor(0, 1, 0, 1, 0, 1, 0, 1, true));
-// { red: 0.85, green: 0.37, blue: 0.63, alpha: 0.92 }
+randomLinearSRGBColor(); // => color(linear-srgb 0.74 0.21 0.45)
+randomLinearSRGBColor(0, 1, 0, 1, 0, 1, 0, 1); // => color(linear-srgb 0.10 0.88 0.42 / 0.62)
+randomLinearSRGBColor(0, 100, 0, 100, 0, 100); // => color(linear-srgb 73% 58% 24%)
+randomLinearSRGBColor(0, 1, 0, 1, 0, 1, 0, 1, true);
+// => { red: 0.85, green: 0.37, blue: 0.63, alpha: 0.92 }
 ```
 
-or
+## API
 
 ```javascript
-import randomLinearSRGBColor from 'random-linear-srgb-color';
-
-// Generate random linear sRGB color as a string
-console.log(randomLinearSRGBColor()); // color(linear-srgb 0.74 0.21 0.45)
-console.log(randomLinearSRGBColor(0, 1, 0, 1, 0, 1, 0, 1)); // color(linear-srgb 0.10 0.88 0.42 / 0.62)
-
-// Generate random linear sRGB color as an object
-console.log(randomLinearSRGBColor(0, 1, 0, 1, 0, 1, 0, 1, true));
-// { red: 0.85, green: 0.37, blue: 0.63, alpha: 0.92 }
+randomLinearSRGBColor(
+  minRed, maxRed,
+  minGreen, maxGreen,
+  minBlue, maxBlue,
+  minAlpha, maxAlpha,
+  useObjectExport
+);
 ```
 
-In the object representation, the returned object contains the following properties:
+All arguments are optional. Red, green, and blue default to `0..1`. Alpha is included only when `minAlpha` or `maxAlpha` is supplied.
 
-- **red**: The value of the red channel (range: 0 to 1 or 0 to 255).
-- **green**: The value of the green channel (range: 0 to 1 or 0 to 255).
-- **blue**: The value of the blue channel (range: 0 to 1 or 0 to 255).
-- **alpha**: The value of the alpha channel (range: 0 to 1 or 0 to 100).
+Ranges at or below `1` are emitted as number channels, such as `0.42`. Ranges above `1` are emitted as percentage channels, so pass `0..100` to produce values like `42%`. Integer percentage ranges emit whole percentages; decimal percentage ranges preserve two decimals.
 
-By adjusting the input parameters and using the useObjectExport parameter, you can control the range of each channel and obtain the color as an object with the respective channel values.
+When `useObjectExport` is `true`, channels come back as raw numbers (not formatted strings), and `alpha` is omitted from the object when no alpha range was supplied.
+
+Every supplied range value must be a finite number, and every minimum must be less than or equal to its maximum. Invalid ranges throw `TypeError` or `RangeError` before any randomness is generated.
 
 ## Acknowledgements
 
